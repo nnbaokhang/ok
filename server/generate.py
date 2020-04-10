@@ -391,6 +391,7 @@ def seed_flags():
                 chosen = random.choice(submissions)
                 assignment.flag(chosen.id, user_ids)
 
+url = "http://10.18.22.230:8000"
 def seed_oauth():
     print("Seeding OAuth...")
     client1 = Client(
@@ -398,9 +399,9 @@ def seed_oauth():
         client_id='example-app',
         client_secret='example-secret',
         redirect_uris=[
-            'http://localhost:8000/authorized',
-            'http://127.0.0.1:8000/authorized',
-            'http://127.0.0.1:8000/login/authorized',
+            url+'/authorized',
+            url+'/authorized',
+            url+'/login/authorized',
         ],
         is_confidential=False,
         active=True,
@@ -422,9 +423,9 @@ def seed_oauth():
             client_id='pending-app',
             client_secret='example-secret2',
             redirect_uris=[
-                'http://localhost:8000/authorized',
-                'http://127.0.0.1:8000/authorized',
-                'http://127.0.0.1:8000/login/authorized',
+                url+'/authorized',
+                url+'/authorized',
+                url+'/login/authorized',
             ],
             is_confidential=False,
             active=False,
