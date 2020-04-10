@@ -42,7 +42,6 @@ import server.utils as utils
 
 admin = Blueprint('admin', __name__)
 
-
 def is_staff(course_arg=None):
     """ A decorator for routes to ensure that user is a member of
     the course staff.
@@ -53,8 +52,21 @@ def is_staff(course_arg=None):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-       
+            if current_user.is_authenticated:
+                if current_user.is_admin:
+                    return func(*args, **kwargs)
+                roles = current_user.enrollments(roles=STAFF_ROLES)
+                if len(roles) > 0:
+                    if course_arg:
+                        course = kwargs[course_arg]
+                        if course in [r.course.id for r in roles]:
+                            return func(*args, **kwargs)
+                    else:
+                        return func(*args, **kwargs)
+            else:
+                return redirect(url_for("student.index"))
+            flash("You are not on the course staff", "warning")
+            return redirect(url_for("student.index"))
         return login_required(wrapper)
     return decorator
 
@@ -63,7 +75,11 @@ def is_admin():
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
+            if current_user.is_authenticated and current_user.is_admin:
+                return func(*args, **kwargs)
+            else:
+                flash("You are not an administrator", "warning")
+                return redirect(url_for("admin.index"))
         return login_required(wrapper)
     return decorator
 
@@ -1462,10 +1478,6 @@ def student_view(cid, email):
     enrollment = student.is_enrolled(cid)
     if not enrollment:
         flash("This email is not enrolled", 'warning')
-
-    # Change the value in the "role" select to not default to STUDENT_ROLE
-    form.role.default = enrollment.role
-    form.process()
 
     assignments = {
         'active': [a.user_status(student, staff_view=True) for a in assignments
