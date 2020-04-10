@@ -43,7 +43,7 @@ import server.utils as utils
 admin = Blueprint('admin', __name__)
 
 def is_staff(course_arg=None):
-   return true
+    return true
 
 def is_admin():
     return true
