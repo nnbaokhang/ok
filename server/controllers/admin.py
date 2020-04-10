@@ -43,13 +43,13 @@ import server.utils as utils
 admin = Blueprint('admin', __name__)
 
 def is_staff(course_arg=None):
-    return true
+    return func(*args, **kwargs)
 
 def is_admin():
-    return true
+    return func(*args, **kwargs)
 
 def is_oauth_client_owner(oauth_client_id_arg):
-    return true
+    return func(*args, **kwargs)
 
 @admin.context_processor
 @cache.memoize(1800)
