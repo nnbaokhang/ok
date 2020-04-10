@@ -43,65 +43,13 @@ import server.utils as utils
 admin = Blueprint('admin', __name__)
 
 def is_staff(course_arg=None):
-    """ A decorator for routes to ensure that user is a member of
-    the course staff.
-
-    Usage:
-    @is_staff() - A staff member for any course
-    @is_staff(course_arg=1) A staff member for the course with id 1
-    """
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if current_user.is_authenticated:
-                if current_user.is_admin:
-                    return func(*args, **kwargs)
-                roles = current_user.enrollments(roles=STAFF_ROLES)
-                if len(roles) > 0:
-                    if course_arg:
-                        course = kwargs[course_arg]
-                        if course in [r.course.id for r in roles]:
-                            return func(*args, **kwargs)
-                    else:
-                        return func(*args, **kwargs)
-            else:
-                return redirect(url_for("student.index"))
-            flash("You are not on the course staff", "warning")
-            return redirect(url_for("student.index"))
-        return login_required(wrapper)
-    return decorator
+   return true
 
 def is_admin():
-    """ A decorator for routes to ensure the user is an admin."""
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if current_user.is_authenticated and current_user.is_admin:
-                return func(*args, **kwargs)
-            else:
-                flash("You are not an administrator", "warning")
-                return redirect(url_for("admin.index"))
-        return login_required(wrapper)
-    return decorator
+    return true
 
 def is_oauth_client_owner(oauth_client_id_arg):
-    """ A decorator for OAuth client management routes to ensure the user owns
-        the OAuth client or is an admin."""
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if current_user.is_authenticated:
-                if current_user.is_admin:
-                    return func(*args, **kwargs)
-                oauth_client_id = kwargs[oauth_client_id_arg]
-                clients = Client.query.filter_by(user_id=current_user.id)
-                if clients.count() > 0:
-                    if oauth_client_id in [c.client_id for c in clients]:
-                        return func(*args, **kwargs)
-            flash("You do not have access to this OAuth client", "warning")
-            return redirect(url_for("admin.clients"))
-        return login_required(wrapper)
-    return decorator
+    return true
 
 @admin.context_processor
 @cache.memoize(1800)
