@@ -108,7 +108,7 @@ def authorize(*args, **kwargs):
     #csrf_check()
 
     if request.method == 'GET':
-        client_id = kwargs.get('client_id')
+        client_id = "example-app"
         client = Client.query.filter_by(client_id=client_id).first()
         kwargs['client'] = client
         kwargs['is_staff'] = current_user.is_staff()
