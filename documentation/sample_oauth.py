@@ -10,6 +10,7 @@ from flask import Flask, redirect, url_for, session, request, jsonify, abort
 from flask_oauthlib.client import OAuth
 import requests
 
+url= 'http://10.18.22.230:5000'
 def create_client(app):
     oauth = OAuth(app)
 
@@ -19,11 +20,11 @@ def create_client(app):
         consumer_secret='example-secret',
         request_token_params={'scope': 'all',
                               'state': lambda: security.gen_salt(10)},
-        base_url='http://localhost:5000/api/v3/',
+        base_url= url+'/api/v3/',
         request_token_url=None,
         access_token_method='POST',
-        access_token_url='http://localhost:5000/oauth/token',
-        authorize_url='http://localhost:5000/oauth/authorize'
+        access_token_url= url+'/oauth/token',
+        authorize_url= url+'/oauth/authorize'
     )
 
     # Real OK Server
@@ -86,7 +87,7 @@ def create_client(app):
     @app.route('/user')
     def client_method():
         token = session['dev_token'][0]
-        r = requests.get('http://localhost:5000/api/v3/user/?access_token={}'.format(token))
+        r = requests.get(url+'/api/v3/user/?access_token={}'.format(token))
         r.raise_for_status()
         return jsonify(r.json())
 
