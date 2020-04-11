@@ -108,7 +108,7 @@ def authorize(*args, **kwargs):
     #csrf_check()
 
     if request.method == 'GET':
-        client_id = "example-app"
+        client_id = kwargs.get('client_id')
         client = Client.query.filter_by(client_id=client_id).first()
         kwargs['client'] = client
         kwargs['is_staff'] = current_user.is_staff()
@@ -154,7 +154,7 @@ def oauth_errors():
 @oauth.route('/client/login/')
 def client_login():
     return redirect(url_for('.authorize',
-        client_id='ok-client',
+        client_id='example-app',
         redirect_uri=OAUTH_OUT_OF_BAND_URI,
         response_type='code',
         scope='all'))
