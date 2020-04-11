@@ -105,7 +105,7 @@ def intercept_out_of_band_redirect(f):
 @oauth_provider.authorize_handler
 def authorize(*args, **kwargs):
     # Only CSRF protect this route.
-    csrf_check()
+    #csrf_check()
 
     if request.method == 'GET':
         client_id = kwargs.get('client_id')
