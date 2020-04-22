@@ -27,8 +27,7 @@ class Config(ProdBaseConfig, BaseConfig):
 
     @classmethod
     def get_default_db_url(cls):
-        print("The database URL is not set!")
-        sys.exit(1)
+        return os.getenv('SQLALCHEMY_URL', 'sqlite:///../oksqlite.db')
 
     @classmethod
     def get_default_redis_host(cls):
