@@ -17,8 +17,8 @@ class Config(ProdBaseConfig, BaseConfig):
     MAX_CONTENT_LENGTH = 30 * 1024 * 1024  # Max Upload Size is 30MB
     
     
-    CACHE_TYPE = 'redis'
-    CACHE_KEY_PREFIX = 'ok-web'
+    #CACHE_TYPE = 'redis'
+    #CACHE_KEY_PREFIX = 'ok-web'
     
     # The Google Cloud load balancer behaves like two proxies:
     # one with the external fowarding rule IP, and
@@ -31,6 +31,7 @@ class Config(ProdBaseConfig, BaseConfig):
     def get_default_db_url(cls):
         return os.getenv('SQLALCHEMY_URL', 'sqlite:///../oksqlite.db')
 
+    '''
     @classmethod
     def get_default_redis_host(cls):
         return 'redis-master'
@@ -38,3 +39,4 @@ class Config(ProdBaseConfig, BaseConfig):
     @classmethod
     def get_flask_caching_enabled(cls):
         return True
+    '''
