@@ -11,8 +11,8 @@ from server.settings._prodbase import Config as ProdBaseConfig
 class Config(ProdBaseConfig, BaseConfig):
     ENV = 'prod'
 
-    STORAGE_CONTAINER = os.getenv('STORAGE_CONTAINER',
-                                  os.path.abspath("./local-storage"))
+    
+    DEBUG = True
     
     MAX_CONTENT_LENGTH = 30 * 1024 * 1024  # Max Upload Size is 30MB
 
