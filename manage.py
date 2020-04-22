@@ -30,7 +30,7 @@ class RunTests(Command):
         test_runner.run(test_suite)
 
 
-manager.add_command("server", Server(host='10.18.22.230'))
+manager.add_command("server", Server(host='10.18.22.230', ssl_context="adhoc"))
 manager.add_command("show-urls", ShowUrls())
 manager.add_command("clean", Clean())
 manager.add_command('db', MigrateCommand)
