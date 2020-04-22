@@ -3,6 +3,8 @@
 """
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
 from server import constants
 
 # Shared settings across all environments
