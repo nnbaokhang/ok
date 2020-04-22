@@ -1,6 +1,7 @@
 import os
 import sys
-
+from dotenv import load_dotenv
+load_dotenv()
 from server.settings import RAVEN_IGNORE_EXCEPTIONS as raven_exceptions
 
 # Shared settings across prod, staging and simple
