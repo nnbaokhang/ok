@@ -23,6 +23,7 @@ class Config(object):
     if os.getenv("GOOGLE_ID") and os.getenv("GOOGLE_SECRET"):
         OAUTH_PROVIDER = 'GOOGLE'
     elif os.getenv("MICROSOFT_APP_ID") and os.getenv("MICROSOFT_APP_SECRET"):
+        print("We are using microsoft")
         OAUTH_PROVIDER = 'MICROSOFT'
     else:
         print("Please set the Google or Microsoft OAuth ID and Secret variables.")
