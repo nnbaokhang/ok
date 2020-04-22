@@ -42,7 +42,7 @@ def record_params(setup_state):
     global oauth
     oauth = OAuth()
     app = setup_state.app
-    provider_name = app.config.get('OAUTH_PROVIDER', GOOGLE)
+    provider_name = app.config.get('OAUTH_PROVIDER', MICROSOFT)
     provider_auth = oauth.remote_app(
         provider_name, 
         app_key=provider_name
