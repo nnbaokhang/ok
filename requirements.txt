@@ -1,6 +1,6 @@
 Flask==1.1.1
 Jinja2==2.10.1
-
+python-dotenv==0.13.0
 # WSGI Containers
 gunicorn==19.7.1
 envdir==1.0.1
