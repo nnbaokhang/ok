@@ -434,25 +434,4 @@ def seed_oauth():
     db.session.commit()
 
 def seed():
-    '''
-    db.session.add(User(email='okstaff@okpy.org', is_admin=True))
-    db.session.commit()
-
-    random.seed(0)
-    seed_users(num=15)
-    seed_courses()
-    seed_assignments()
-    seed_enrollments()
-    seed_backups()
-    seed_comments()
-    seed_groups()
-    seed_flags()
-    seed_queues()
-    seed_scores()
-    '''
     seed_oauth()
-
-    # Large course test. Uncomment to test large number of enrollments
-    # cache.clear()
-    # seed_users(num=1500)
-    # seed_enrollments()
