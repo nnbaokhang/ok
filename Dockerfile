@@ -27,8 +27,8 @@ ADD . .
 RUN mv docker/nginx/nginx.conf /etc/nginx/nginx.conf && \
     mv docker/nginx/default.conf /etc/nginx/conf.d/default.conf && \
     mv docker/supervisor.conf /etc/supervisor.conf && \
-    mv docker/wait-for /wait-for &&\
-    mv server.crt /etc/nginx/ &&\
+    mv docker/wait-for /wait-for && \
+    mv server.crt /etc/nginx/ && \
     mv server.key /etc/nginx/
 
 RUN ./manage.py assets build
