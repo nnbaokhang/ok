@@ -389,7 +389,7 @@ def seed_flags():
                 chosen = random.choice(submissions)
                 assignment.flag(chosen.id, user_ids)
 
-url = "https://10.18.22.245:8000"
+url = "https://0.0.0.0:8000"
 def seed_oauth():
     print("Seeding OAuth...")
     client1 = Client(
