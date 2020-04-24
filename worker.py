@@ -20,3 +20,4 @@ if __name__ == '__main__':
             # disable sentry for now (causes worker CrashLoopBackOff in kubernetes)
             # register_sentry(client, worker)
         worker.work()
+     return app
